@@ -1,7 +1,7 @@
 export default dsl;
 
 Object.assign(dsl, {
-	foo() {}
+	safeHtml() {/* TODO: implement */}
 });
 
 function dsl(strings, ...values) {
@@ -9,11 +9,6 @@ function dsl(strings, ...values) {
 			if ('function' === typeof value) {
 				value = value();
 			}
-			value = safeString(value);
 			return strings[i] + value;
 		}).join("");
-}
-
-function safeString(str) {
-	return str;
 }

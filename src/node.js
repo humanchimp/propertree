@@ -1,27 +1,25 @@
-
-import Magic from './magic.js';
 const { keys, defineProperty } = Object;
 
 export default class Node {
 	constructor(context, calculator) {
-	this.context = context;
-	this.calculator = calculator;
+		this.context = context;
+		this.calculator = calculator;
 	}
 
-	calculate(data, dsl) {
-	const calculator = this.calculator(data, dsl);
-	const magic = keys(calculator).reduce((memo, key) => {
-		const value = calculator[key];
-		const isFunction = 'function' === typeof value;
+	compute(data, dsl) {
+		const calculator = this.calculator(data, dsl);
+		const membrane = keys(calculator).reduce((memo, key) => {
+			const value = calculator[key];
+			const isFunction = 'function' === typeof value;
 
-		defineProperty(memo, key, (
-			isFunction ?
-			property({ get() { return value.call(magic) }}) :
-			property({ value }))
-		);
-		return memo;
-	}, new Magic);
-	return magic;
+			defineProperty(memo, key, (
+				isFunction ?
+				property({ get() { return value.call(membrane) }}) :
+				property({ value })));
+
+			return memo;
+		}, {});
+		return membrane;
 	}
 }
 

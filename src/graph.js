@@ -8,32 +8,16 @@ export default class Graph {
 		this.nodes = new Map();
 	}
 
-	addNode(key, node) {
+	node(key, node) {
 		this.nodes.set(key, new Node(key, node));
-		this.makeGetter(key);
 		return this;
 	}
 
-	removeNode(key) {
-		this.nodes.delete(key);
-		return this;
-	}
-
-	getNode(key) {
-		return this.nodes.get(key);
-	}
-
-	makeGetter(key) {
-		defineProperty(this, key, { get() {
-			return this.calculate()[key];
-		}});
-	}
-
-	calculate(data, nodes=[...this.nodes.entries()]) {
+	compute(data, nodes=[...this.nodes.entries()]) {
 		return nodes.map(([key, node]) =>
-				[key, node.calculate(data[key], dsl)])
-			.reduce((memo, [key, value]) => {
-				memo[key] = value;
+				[key, node.compute(data[key], dsl)])
+			.reduce((memo, [key, computed]) => {
+				memo[key] = computed;
 				return memo;
 			}, {});
 	}
