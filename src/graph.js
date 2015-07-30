@@ -1,8 +1,6 @@
 import Node from './node.js';
 import dsl from './dsl.js';
 
-const { defineProperty } = Object;
-
 export default class Graph {
 	constructor() {
 		this.nodes = new Map();
