@@ -1,9 +1,9 @@
 const { keys, defineProperty } = Object;
 
 export default function createMembraneFactory(calculatorFactory) {
-	let isInitialized = false;
-
 	return (data, dsl) => new Membrane(data, dsl);
+
+	let isInitialized = false;
 
 	function Membrane(target, dsl) {
 		this.target = target;
