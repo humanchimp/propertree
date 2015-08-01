@@ -27,7 +27,7 @@ export default function createMembraneFactory(calculatorFactory) {
 
 			isInitialized = true;
 		}
-	};
+	}
 	return (data, dsl) => new Membrane(data, dsl);
 }
 
