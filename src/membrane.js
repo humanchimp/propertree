@@ -3,6 +3,8 @@ const { keys, defineProperty } = Object;
 export default function createMembraneFactory(calculatorFactory) {
 	let isInitialized = false;
 
+	return (data, dsl) => new Membrane(data, dsl);
+
 	function Membrane(target, dsl) {
 		this.target = target;
 		this.dsl = dsl;
@@ -23,7 +25,6 @@ export default function createMembraneFactory(calculatorFactory) {
 
 		isInitialized = true;
 	}
-	return (data, dsl) => new Membrane(data, dsl);
 }
 
 function property(descriptor) {
