@@ -20,8 +20,7 @@ export default function createMembraneFactory(calculatorFactory) {
 			defineProperty(Membrane.prototype, key,
 				isFunction ?
 				property({ get() { return value.call(this); }}) :
-				property({ value }));
-		});
+				property({ value }))});
 
 		isInitialized = true;
 	}
