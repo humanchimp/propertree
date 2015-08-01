@@ -33,10 +33,6 @@ export default function createMembraneFactory(calculatorFactory) {
 
 			isInitialized = true;
 		}
-
-		get isInitialized() {
-			return isInitialized;
-		}
 	};
 	return (data, dsl) => new Membrane(data, dsl);
 }
