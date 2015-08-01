@@ -1,19 +1,13 @@
 const { keys, defineProperty } = Object;
 
-class Exemplar {
-	constructor(target, dsl) {
-		this.target = target;
-		this.dsl = dsl;
-	}
-}
-
 export default function createMembraneFactory(calculatorFactory) {
 	let isInitialized = false;
 
-	class Membrane extends Exemplar {
+	class Membrane {
 
 		constructor(target, dsl) {
-			super(target, dsl);
+			this.target = target;
+			this.dsl = dsl;
 			this.calculator = calculatorFactory(target, dsl);
 			this.initialize();
 		}
