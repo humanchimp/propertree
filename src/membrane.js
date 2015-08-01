@@ -34,7 +34,7 @@ export default function createMembraneFactory(calculatorFactory) {
 			isInitialized = true;
 		}
 
-		isInitialized() {
+		get isInitialized() {
 			return isInitialized;
 		}
 	};
