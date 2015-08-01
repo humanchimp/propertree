@@ -22,7 +22,7 @@ const p = propertree()
 			return Math.floor(this.daysOld / 365);
 		},
 
-		friends: gremlin('').handler(function () {
+		friends: gremlin('').handler(function friends() {
 
 		})
 	}));
