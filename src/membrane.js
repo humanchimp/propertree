@@ -9,10 +9,8 @@ export default function createMembraneFactory(calculatorFactory) {
 			this.target = target;
 			this.dsl = dsl;
 			this.calculator = calculatorFactory(target, dsl);
-			this.initialize();
-		}
 
-		initialize() {
+			// LAZY GETTER CREATION:
 			if (isInitialized) return;
 
 			keys(this.calculator).forEach(key => {
