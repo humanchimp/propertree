@@ -3,28 +3,25 @@ const { keys, defineProperty } = Object;
 export default function createMembraneFactory(calculatorFactory) {
 	let isInitialized = false;
 
-	class Membrane {
+	function Membrane(target, dsl) {
+		this.target = target;
+		this.dsl = dsl;
+		this.calculator = calculatorFactory(target, dsl);
 
-		constructor(target, dsl) {
-			this.target = target;
-			this.dsl = dsl;
-			this.calculator = calculatorFactory(target, dsl);
+		// LAZY GETTER CREATION:
+		if (isInitialized) return;
 
-			// LAZY GETTER CREATION:
-			if (isInitialized) return;
+		keys(this.calculator).forEach(key => {
+			const value = this.calculator[key];
+			const isFunction = 'function' === typeof value;
 
-			keys(this.calculator).forEach(key => {
-				const value = this.calculator[key];
-				const isFunction = 'function' === typeof value;
+			defineProperty(Membrane.prototype, key,
+				isFunction ?
+				property({ get() { return value.call(this); }}) :
+				property({ value }));
+		});
 
-				defineProperty(Membrane.prototype, key,
-					isFunction ?
-					property({ get() { return value.call(this); }}) :
-					property({ value }));
-			});
-
-			isInitialized = true;
-		}
+		isInitialized = true;
 	}
 	return (data, dsl) => new Membrane(data, dsl);
 }
