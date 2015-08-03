@@ -1,4 +1,4 @@
-import gremlin from './gremlin.js';
+import traverse from './traverse.js';
 
 export default dsl;
 
@@ -7,7 +7,7 @@ Object.assign(dsl, {
 	//       don't want to think about boring html escaping.
 	html: dsl,
 
-	gremlin
+	traverse
 
 });
 

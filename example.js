@@ -1,7 +1,7 @@
 import propertree from './index.js';
 
 const p = propertree()
-	.node('person', ({ firstName, lastName, birthdate }, { html, gremlin }) => ({
+	.node('person', ({ firstName, lastName, birthdate }, { html, traverse: T }) => ({
 
 		firstName,
 
@@ -22,7 +22,11 @@ const p = propertree()
 			return Math.floor(this.daysOld / 365);
 		},
 
-		friends: gremlin('').handler(function friends() {
+		friends: T().out('friends').handler(function (friends) {
+			console.log(friends);
+		}),
+
+		groups: T().out('groups').handler(function (groups) {
 
 		})
 	}));
